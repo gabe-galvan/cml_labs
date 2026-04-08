@@ -1,0 +1,405 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          ! IOSvL2 Config generated on 2025-09-10 02:14
+          ! by ank-ng
+          !
+          version 15.2
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          no service password-encryption
+          service compress-config
+          no service config
+          enable password cisco
+          no ip domain lookup
+          !
+          line vty 0 4
+          transport input ssh telnet
+          exec-timeout 720 0
+          password cisco
+          login
+          !
+          line con 0
+          password cisco
+          !
+          hostname sw-3
+          !
+          boot-start-marker
+          boot-end-marker
+          !
+          !
+          no aaa new-model
+          !
+          vtp domain virl.lab
+          vtp mode transparent
+          !
+          vlan 2
+            name ank_vlan2
+          !
+          !
+          no cdp run
+          !
+          !
+          ip cef
+          no ipv6 cef
+          !
+          spanning-tree mode pvst
+          spanning-tree extend system-id
+          !
+          vlan internal allocation policy ascending
+          !
+          !
+          vrf definition Mgmt-intf
+          !
+           address-family ipv4
+           exit-address-family
+           !
+           address-family ipv6
+           exit-address-family
+          !
+          !
+          interface Loopback0
+              description not connected
+              shutdown
+          interface GigabitEthernet0/0
+              description not connected
+              shutdown
+          interface GigabitEthernet0/1
+              description to GigabitEthernet0/1.SW-1
+              no shutdown
+          interface GigabitEthernet0/2
+              description to GigabitEthernet0/1.SW-2
+              no shutdown
+          interface GigabitEthernet0/3
+              description not connected
+              shutdown
+          !
+          !
+          ip forward-protocol nd
+          !
+          no ip http server
+          no ip http secure-server
+          !
+          !
+          control-plane
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: SW-3
+    node_definition: iosvl2
+    parameters: {}
+    ram: null
+    tags: []
+    x: -1680
+    y: -440
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: GigabitEthernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: GigabitEthernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: GigabitEthernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          ! IOSvL2 Config generated on 2025-09-10 02:14
+          ! by ank-ng
+          !
+          version 15.2
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          no service password-encryption
+          service compress-config
+          no service config
+          enable password cisco
+          no ip domain lookup
+          !
+          line vty 0 4
+          transport input ssh telnet
+          exec-timeout 720 0
+          password cisco
+          login
+          !
+          line con 0
+          password cisco
+          !
+          hostname sw-1
+          !
+          boot-start-marker
+          boot-end-marker
+          !
+          !
+          no aaa new-model
+          !
+          vtp domain virl.lab
+          vtp mode transparent
+          !
+          vlan 2
+            name ank_vlan2
+          !
+          !
+          no cdp run
+          !
+          !
+          ip cef
+          no ipv6 cef
+          !
+          spanning-tree mode pvst
+          spanning-tree extend system-id
+          !
+          vlan internal allocation policy ascending
+          !
+          !
+          vrf definition Mgmt-intf
+          !
+           address-family ipv4
+           exit-address-family
+           !
+           address-family ipv6
+           exit-address-family
+          !
+          !
+          interface Loopback0
+              description not connected
+              shutdown
+          interface GigabitEthernet0/0
+              description to GigabitEthernet0/0.SW-2
+              no shutdown
+          interface GigabitEthernet0/1
+              description to GigabitEthernet0/1.SW-3
+              no shutdown
+          interface GigabitEthernet0/2
+              description not connected
+              shutdown
+          interface GigabitEthernet0/3
+              description not connected
+              shutdown
+          !
+          !
+          ip forward-protocol nd
+          !
+          no ip http server
+          no ip http secure-server
+          !
+          !
+          control-plane
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: SW-1
+    node_definition: iosvl2
+    parameters: {}
+    ram: null
+    tags: []
+    x: -1800
+    y: -600
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: GigabitEthernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: GigabitEthernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: GigabitEthernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          ! IOSvL2 Config generated on 2025-09-10 02:14
+          ! by ank-ng
+          !
+          version 15.2
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          no service password-encryption
+          service compress-config
+          no service config
+          enable password cisco
+          no ip domain lookup
+          !
+          line vty 0 4
+          transport input ssh telnet
+          exec-timeout 720 0
+          password cisco
+          login
+          !
+          line con 0
+          password cisco
+          !
+          hostname sw-2
+          !
+          boot-start-marker
+          boot-end-marker
+          !
+          !
+          no aaa new-model
+          !
+          vtp domain virl.lab
+          vtp mode transparent
+          !
+          vlan 2
+            name ank_vlan2
+          !
+          !
+          no cdp run
+          !
+          !
+          ip cef
+          no ipv6 cef
+          !
+          spanning-tree mode pvst
+          spanning-tree extend system-id
+          !
+          vlan internal allocation policy ascending
+          !
+          !
+          vrf definition Mgmt-intf
+          !
+           address-family ipv4
+           exit-address-family
+           !
+           address-family ipv6
+           exit-address-family
+          !
+          !
+          interface Loopback0
+              description not connected
+              shutdown
+          interface GigabitEthernet0/0
+              description to GigabitEthernet0/0.SW-1
+              no shutdown
+          interface GigabitEthernet0/1
+              description to GigabitEthernet0/2.SW-3
+              no shutdown
+          interface GigabitEthernet0/2
+              description not connected
+              shutdown
+          interface GigabitEthernet0/3
+              description not connected
+              shutdown
+          !
+          !
+          ip forward-protocol nd
+          !
+          no ip http server
+          no ip http secure-server
+          !
+          !
+          control-plane
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: SW-2
+    node_definition: iosvl2
+    parameters: {}
+    ram: null
+    tags: []
+    x: -1560
+    y: -600
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: GigabitEthernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: GigabitEthernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: GigabitEthernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n1
+    n2: n2
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: iosvl2-1-GigabitEthernet0/0<->iosvl2-2-GigabitEthernet0/0
+  - id: l1
+    n1: n1
+    n2: n0
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: iosvl2-1-GigabitEthernet0/1<->iosvl2-0-GigabitEthernet0/1
+  - id: l2
+    n1: n2
+    n2: n0
+    i1: i2
+    i2: i3
+    conditioning: {}
+    label: iosvl2-2-GigabitEthernet0/1<->iosvl2-0-GigabitEthernet0/2
+lab:
+  description: ''
+  notes: ''
+  title: EIF - Lab 3
+  version: 0.3.0

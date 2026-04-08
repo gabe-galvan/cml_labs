@@ -1,0 +1,508 @@
+annotations:
+  - border_color: '#808080FF'
+    border_radius: 0
+    border_style: ''
+    color: '#2E3DDFFF'
+    rotation: 0
+    thickness: 1
+    type: rectangle
+    x1: -160.0
+    y1: -80.0
+    x2: 80.0
+    y2: 200.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#000000'
+    rotation: 0
+    text_bold: false
+    text_content: Area 0
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -160.0
+    y1: -80.0
+    z_index: 1
+  - border_color: '#808080FF'
+    border_radius: 0
+    border_style: ''
+    color: '#EA2828FF'
+    rotation: 0
+    thickness: 1
+    type: rectangle
+    x1: -320.0
+    y1: -80.0
+    x2: 160.0
+    y2: 40.0
+    z_index: 2
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#000000'
+    rotation: 0
+    text_bold: false
+    text_content: Area 1
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -280.0
+    y1: -80.0
+    z_index: 3
+  - border_color: '#808080FF'
+    border_radius: 0
+    border_style: ''
+    color: '#EA28D4FF'
+    rotation: 0
+    thickness: 1
+    type: rectangle
+    x1: -320.0
+    y1: 80.0
+    x2: 160.0
+    y2: 40.0
+    z_index: 2
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#000000'
+    rotation: 0
+    text_bold: false
+    text_content: Area 2
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -280.0
+    y1: 80.0
+    z_index: 4
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 1.1.0.1 255.255.255.0
+          !
+          !
+          int lo1
+          ip addr 1.1.1.1 255.255.255.0
+          !
+          !
+          int lo2
+          ip addr 1.1.2.1 255.255.255.0
+          !
+          !
+          int lo3
+          ip addr 1.1.3.1 255.255.255.0
+          !
+          !
+          int e0/0
+          ip addr 12.1.1.1 255.255.255.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -320
+    y: -40
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 2.2.2.2 255.255.255.0
+          !
+          !
+          int e0/0
+          ip addr 12.1.1.2 255.255.255.0
+          No shut
+          !
+          !
+          int e0/1
+          ip addr 23.1.1.2 255.255.255.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -160
+    y: -40
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R4
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 4.4.0.4 255.255.255.0
+          !
+          !
+          int lo1
+          ip addr 4.4.1.4 255.255.255.0
+          !
+          !
+          int lo2
+          ip addr 4.4.2.4 255.255.255.0
+          !
+          !
+          int lo3
+          ip addr 4.4.3.4 255.255.255.0
+          !
+          !
+          int lo4
+          ip addr 4.4.4.4 255.255.255.0
+          !
+          !
+          int e0/0
+          ip addr 34.1.1.4 255.255.255.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R4
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -320
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 3.3.3.3 255.255.255.0
+          !
+          !
+          int E0/1
+          ip addr 23.1.1.3 255.255.255.0
+          No shut
+          !
+          !
+          int E0/0
+          ip addr 34.1.1.3 255.255.255.0
+          No shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -160
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n0
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R1-Ethernet0/0<->R2-Ethernet0/0
+  - id: l1
+    n1: n1
+    n2: n3
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R2-Ethernet0/1<->R3-Ethernet0/1
+  - id: l2
+    n1: n3
+    n2: n2
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R3-Ethernet0/0<->R4-Ethernet0/0
+lab:
+  description: 'Lab 8: OSPF Summarization'
+  notes: |-
+    #### Task 1
+    Configure the routers as follows:
+    - R4 should redistribute the four loopback interfaces (4.4.0.4 /24–4.4.3.4 /24) into the OSPF routing domain.
+    - R4 should advertise its Loopback4 and G0/3 interfaces in Area 2.
+    - R1 should advertise all of its interfaces in OSPF Area 1. Use a minimum number of commands to accomplish this.
+    - R2 should advertise its Loopback0 and G0/3 interfaces in Area 0. It should advertise its G0/1 interface in Area 1.
+    - R3 should advertise its Loopback0 and G0/2 interfaces in Area 0. It should advertise its G0/4 interface in Area 2.
+    - R1 should use 0.0.0.1, R2 should use 0.0.0.2, R3 should use 0.0.0.3, and R4 should use 0.0.0.4 as their OSPF router IDs.
+
+
+
+    #### Task 2
+    Configure the appropriate router in Area 2 to summarize all external (E2) routes.
+
+
+    #### Task 3
+    Configure the appropriate router in Area 1 to summarize the following four networks and only advertise a single summary route:
+    - 1.1.0.0 /24
+    - 1.1.1.0 /24
+    - 1.1.2.0 /24
+    - 1.1.3.0 /24
+
+    #### Task 4
+    Ensure that the routers do not install a null 0 route in the routing table when they summarize routes.
+    You should show two ways to accomplish this task.
+
+
+    #### Task 5
+    Reconfigure Area 2 such that the routers within Area 2 see all the specific routes, but the routers in Area 0 and Area 1 see only a single summary route.
+
+
+    #### Task 6
+    In Area 1, configure R1 to advertise its loopback interfaces with their correct mask.
+    You should use a minimum number of commands to accomplish this request.
+    Configure the appropriate router such that the summary route (1.1.0.0/22) plus subnet 1.1.2.0/24 is advertised to other areas.
+
+
+    #### Task 7
+    In Area 2, configure the appropriate router(s) such that R3 advertises the summary plus one of the specific routes (4.4.0.4/24).
+  title: EIF_CHAP5_LAB8
+  version: 0.3.0

@@ -1,0 +1,385 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int e0/0
+          ip addr 192.1.1.1 255.255.255.0
+          no shut
+          !
+          !
+          ip route 192.1.2.2 255.255.255.255 192.1.1.10
+          ip route 192.1.3.3 255.255.255.255 192.1.1.10
+          !
+          !
+          int tunnel 123
+          ip addr 10.1.1.1 255.255.255.0
+          tunnel source e0/0
+          tunnel mode gre multipoint
+          ip nhrp network-id 111
+          ip nhrp map 10.1.1.2 192.1.2.2
+          ip nhrp map 10.1.1.3 192.1.3.3
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -120
+    y: -40
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int e0/0
+          ip addr 192.1.2.2 255.255.255.0
+          no shut
+          !
+          !
+          int e0/1
+          ip addr 23.1.1.2 255.255.255.0
+          no shut
+          !
+          !
+          ip route 192.1.1.1 255.255.255.255 192.1.2.10
+          ip route 192.1.3.3 255.255.255.255 192.1.2.10
+          !
+          !
+          int tunnel 123
+          ip addr 10.1.1.2 255.255.255.0
+          tunnel source e0/0
+          tunnel mode gre multipoint
+          ip nhrp network-id 222
+          ip nhrp map 10.1.1.1 192.1.1.1
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -280
+    y: 200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int e0/0
+          ip addr 192.1.3.3 255.255.255.0
+          no shut
+          !
+          !
+          int e0/1
+          ip addr 23.1.1.3 255.255.255.0
+          no shut
+          !
+          !
+          ip route 192.1.1.1 255.255.255.255 192.1.3.10
+          ip route 192.1.2.2 255.255.255.255 192.1.3.10
+          !
+          !
+          int tunnel 123
+          ip addr 10.1.1.3 255.255.255.0
+          tunnel source e0/0
+          tunnel mode gre multipoint
+          ip nhrp network-id 333
+          ip nhrp map 10.1.1.1 192.1.1.1
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 40
+    y: 200
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          !
+          int range e0/0 - 2
+          no switchport
+          !
+          int e0/0
+          ip addr 192.1.1.10 255.255.255.0
+          no shu
+          !
+          !
+          int e0/1
+          ip addr 192.1.2.10 255.255.255.0
+          no shu
+          !
+          !
+          int e0/2
+          ip addr 192.1.3.10 255.255.255.0
+          no shu
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -120
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n3
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/0<->R1-Ethernet0/0
+  - id: l1
+    n1: n2
+    n2: n1
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R3-Ethernet0/1<->R2-Ethernet0/1
+  - id: l2
+    n1: n3
+    n2: n1
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/1<->R2-Ethernet0/0
+  - id: l3
+    n1: n3
+    n2: n2
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/2<->R3-Ethernet0/0
+lab:
+  description: 'Lab 5: OSPF Point-to-Multipoint and Point-to-Multipoint Non-broadcast
+    Networks'
+  notes: |
+    #### Task 1
+    Configure OSPF Area 0 on all links in the previous topology.
+    The OSPF router IDs of all routers should be 0.0.0.x, where x is the router number.
+    The tunnel interface of these routers should not perform DR/BDR election.
+
+    If this configuration is performed successfully, the routers in this topology should have full NLRI to every network in this topology.
+
+
+    #### Task 2
+    Since R2’s connection to the cloud is 10 Mbps and R3’s connection is 100 Mbps, R1 should not perform equal-cost load sharing.
+    R1 should go through R3 to reach network 23.1.1.0/24.
+    **Do not configure PBR or the IP ospf cost command to accomplish this task.**
+  title: EIF_CHAP5_LAB5
+  version: 0.3.0

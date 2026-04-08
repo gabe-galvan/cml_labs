@@ -1,0 +1,945 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R7
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface Loopback210
+           ip address 192.168.210.21 255.255.255.0
+          !
+          interface Loopback211
+           ip address 192.168.211.21 255.255.255.0
+          !
+          interface Loopback212
+           ip address 192.168.212.21 255.255.255.0
+          !
+          interface Loopback213
+           ip address 192.168.213.21 255.255.255.0
+          !
+          interface Loopback214
+           ip address 192.168.214.21 255.255.255.0
+          !
+          interface Loopback215
+           ip address 192.168.215.21 255.255.255.0
+          !
+          interface Loopback216
+           ip address 192.168.216.21 255.255.255.0
+          !
+          interface Loopback217
+           ip address 192.168.217.21 255.255.255.0
+          !
+          interface Loopback218
+           ip address 192.168.218.21 255.255.255.0
+          !
+          interface Loopback219
+           ip address 192.168.219.21 255.255.255.0
+          !
+          interface e0/0
+           ip address 5.100.212.21 255.255.255.0
+           no shut
+          !
+          key chain txt
+          key 1
+          key-string ccie
+          !
+          interface g0/9
+          ip add 5.100.157.7 255.255.255.0
+          ip rip authentication key-chain txt
+          ip rip authentication mode md5
+          no shut
+          !
+          router rip
+           passive-interface Loopback210
+           passive-interface Loopback211
+           passive-interface Loopback212
+           passive-interface Loopback213
+           passive-interface Loopback214
+           passive-interface Loopback215
+           passive-interface Loopback216
+           passive-interface Loopback217
+           passive-interface Loopback218
+           passive-interface Loopback219
+           network 5.0.0.0
+           network 192.168.210.0
+           network 192.168.211.0
+           network 192.168.212.0
+           network 192.168.213.0
+           network 192.168.214.0
+           network 192.168.215.0
+           no validate-update
+           network 192.168.216.0
+           network 192.168.217.0
+           network 192.168.218.0
+           network 192.168.219.0
+           distribute-list 10 out
+           no auto-summary
+          !
+          access-list 10 permit 0.0.1.0 255.255.254.255
+          !
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R7
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 400
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          key chain TST
+           key 1
+             key-string ccie
+          !
+          interface Loopback0
+           ip address 5.100.99.1 255.255.255.255
+          !
+          interface Loopback41
+           ip address 192.168.4.1 255.255.255.255
+          !
+          interface Loopback42
+           ip address 192.168.4.2 255.255.255.255
+          !
+          interface e0/1
+           ip address 5.100.15.1 255.255.255.0
+           no shut
+          !
+          !
+          interface e0/0
+           ip address 5.100.157.1 255.255.255.0
+           ip rip authentication mode md5
+           ip rip authentication key-chain TST
+           no shut
+          !
+          !
+          router rip
+           version 2
+           network 5.0.0.0
+           network 192.168.4.0
+           distribute-list toR5 out g0/5
+          !
+          ip access-list standard toR5
+           deny 192.168.4.1
+           permit any
+          !
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -320
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R4
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface Loopback0
+           ip address 5.100.99.4 255.255.255.255
+          !
+          interface e0/1
+           ip address 5.100.4.4 255.255.255.0
+           no shut
+          !
+          interface e0/2
+          ip address 192.1.4.4 255.255.255.0
+          no shut
+          !
+          !
+          interface tunnel 1
+          ip address 5.100.245.4 255.255.255.0
+          tunnel sour e0/2
+          tunnel mode gre multi
+          ip nhrp network-id 444
+          ip nhrp map 5.100.245.5 192.1.5.5
+          ip nhrp map multicast 192.1.5.5
+          !
+          !
+          router rip
+           version 2
+           passive-interface default
+          network 5.0.0.0
+           no auto-summary
+          !
+          ip route 192.1.5.5 255.255.255.255 192.1.4.10
+          ip route 192.1.2.2 255.255.255.255 192.1.4.10
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R4
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 80
+    y: 280
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          key chain TST
+           key 1
+             key-string ccie
+          !
+          interface Loopback0
+           ip address 5.100.99.3 255.255.255.255
+          !
+          interface e0/1
+           ip address 5.100.157.3 255.255.255.0
+           ip rip authentication mode md5
+           ip rip authentication key-chain TST
+           no shut
+          !
+          router rip
+           version 2
+           network 5.0.0.0
+           distribute-list 157 in
+           no auto-summary
+          !
+          access-list 157 deny ip any host 5.100.157.5
+          access-list 157 permit ip any any
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -200
+    y: 280
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface Loopback0
+           ip address 5.100.99.2 255.255.255.255
+          !
+          interface e0/0
+           ip address 5.100.212.2 255.255.255.0
+           no shut
+          !
+          interface e0/1
+          ip address 192.1.2.2 255.255.255.0
+          no shut
+          !
+          interface tunnel 1
+          ip address 5.100.245.2 255.255.255.0
+          tunnel sour e0/1
+          tunnel mode gre multipoint
+          ip nhrp network-id 222
+          ip nhrp map 5.100.245.5 192.1.5.5
+          ip nhrp map multicast 192.1.5.5
+          !
+          !
+          router rip
+           version 2
+           network 5.0.0.0
+           distribute-list prefix plIn out
+           no auto-summary
+          !
+          !
+          ip prefix-list plIn seq 5 deny 5.100.212.0/24
+          ip prefix-list plIn seq 10 permit 0.0.0.0/0
+          !
+          !
+          ip route 192.1.5.5 255.255.255.255 192.1.2.10
+          ip route 192.1.4.4 255.255.255.255 192.1.2.10
+          !
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 240
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R5
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          key chain TST
+           key 1
+             key-string ccie
+          !
+          interface Loopback0
+           ip address 5.100.99.5 255.255.255.255
+          !
+          !
+          interface e0/1
+          ip address 5.100.15.5 255.255.255.0
+          no shut
+          !
+          !
+          interface e0/2
+          ip address 5.100.157.5 255.255.255.0
+          ip rip authentication mode md5
+          ip rip authentication key-chain TST
+          no shut
+          !
+          !
+          interface e0/0
+          ip address 192.1.5.5 255.255.255.0
+          no shut
+          !
+          !
+          interface tunnel 1
+          ip address 5.100.245.5 255.255.255.0
+          tunnel source e0/0
+          tunnel mode gre multi
+          ip nhrp network-id 555
+          ip nhrp map 5.100.245.2 192.1.2.2
+          ip nhrp map 5.100.245.4 192.1.4.4
+          ip nhrp map multi 192.1.2.2
+          ip nhrp map multicast 192.1.4.4
+          !
+          router rip
+           version 2
+           network 5.0.0.0
+           no auto-summary
+          !
+          !
+          ip route 192.1.2.2 255.255.255.255 192.1.5.10
+          ip route 192.1.4.4 255.255.255.255 192.1.5.10
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: R5
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -80
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        type: physical
+        slot: 4
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        type: physical
+        slot: 5
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        type: physical
+        slot: 6
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          !
+          vlan 157
+          !
+          int range e0/0 - 2
+          switchport mode access
+          switchport access vlan 157
+          no shut
+          !
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -200
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW2
+          !
+          vlan 245
+          exit
+          !
+          int range e0/0 - 2
+          no shut
+          !
+          interface e0/1
+          no switchport
+          ip address 192.1.2.10 255.255.255.0
+          no shut
+          !
+          !
+          !
+          interface e0/2
+          no switchport
+          ip address 192.1.4.10 255.255.255.0
+          no shut
+          !
+          interface e0/0
+          no switchport
+          ip address 192.1.5.10 255.255.255.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: SW2
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 80
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n1
+    n2: n5
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R1-Ethernet0/1<->R5-Ethernet0/1
+  - id: l1
+    n1: n4
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R2-Ethernet0/0<->R7-Ethernet0/0
+  - id: l2
+    n1: n6
+    n2: n5
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: sw-1-Ethernet0/2<->R5-Ethernet0/2
+  - id: l3
+    n1: n6
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: sw-1-Ethernet0/0<->R1-Ethernet0/0
+  - id: l4
+    n1: n6
+    n2: n3
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: sw-1-Ethernet0/1<->R3-Ethernet0/1
+  - id: l5
+    n1: n5
+    n2: n7
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R5-Ethernet0/0<->SW-2-Ethernet0/0
+  - id: l6
+    n1: n4
+    n2: n7
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R2-Ethernet0/1<->SW-2-Ethernet0/1
+  - id: l7
+    n1: n7
+    n2: n2
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: SW-2-Ethernet0/2<->R4-Ethernet0/2
+lab:
+  description: 'LAB 3: RIPv2 Challenge Lab'
+  notes: |-
+    #### Ticket 1
+    R1 is configured to filter its Lo41. However, this interface is still reachable from R5.
+    - Restrictions:
+      - Do not configure another access list, prefix list, or route map.
+      - Use only two commands to accomplish this task.
+
+    #### Ticket 2
+    R7 is configured to filter all even third octet networks (for example, x.x.2.x, x.x.4.x,
+    x.x.6.x) with the mask /24. However, this has affected all routes, and none of them are
+    reachable from R2.
+
+    #### Ticket 3
+    R4 can’t reach R1’s Lo42 using its Lo0 as the source:
+    - Use a single command to fix this problem.
+
+    #### Ticket 4
+    R2 is configured to filter its E0/0 interface with the IP address 5.100.212.2/24, but R5
+    can’t reach R2’s Lo0.
+
+    #### Ticket 5
+    R4 can’t reach R2’s Lo0 interface.
+    - Restrictions:
+      - Do not configure the neighbor command.
+      - Do not change the DMVPN phase or configure DMVPN in a dynamic manner.
+
+    #### Ticket 6
+    R3 can’t ping R1’s Lo0.
+
+    #### Ticket 7
+    R3 is configured to filter all routes received from R5. However, the routes are still there.
+    Do not use another method to fix this problem; correct the existing problem.
+
+    #### Ticket 8
+    R7 should not have any RIPv2 routes in its routing table. You must configure an out-
+    bound filter using a standard numbered ACL and a distribute-list command on the E0/0
+    interface of R2 to accomplish this task. You are allowed to remove one command.
+
+    #### Ticket 9
+    Erase the startup configuration and reload the devices before proceeding to the next lab
+  title: EIF_CHAP3_LAB3
+  version: 0.3.0

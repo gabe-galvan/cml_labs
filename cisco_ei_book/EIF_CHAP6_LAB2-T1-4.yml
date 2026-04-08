@@ -1,0 +1,450 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname SW1
+          !
+          vlan 100
+          !
+          interface range e0/0 - 3
+          swi mode access
+          swi access vlan 100
+          no shut
+          end
+          !
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -840
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 1.1.1.1 255.0.0.0
+          !
+          int lo1
+          ip addr 192.168.1.1 255.255.255.0
+          !
+          int e0/0
+          ip addr 10.1.1.1 255.255.255.0
+          no shu
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -960
+    y: -240
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 3.3.3.3 255.0.0.0
+          !
+          int lo1
+          ip addr 192.168.3.3 255.255.255.0
+          !
+          int e0/2
+          ip addr 10.1.1.3 255.255.255.0
+          no shu
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -960
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 2.2.2.2 255.0.0.0
+          !
+          int lo1
+          ip addr 192.168.2.2 255.255.255.0
+          !
+          int e0/1
+          ip addr 10.1.1.2 255.255.255.0
+          no shu
+          !
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -720
+    y: -240
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R4
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          int lo0
+          ip addr 4.4.4.4 255.0.0.0
+          !
+          int lo1
+          ip addr 192.168.4.4 255.255.255.0
+          !
+          int e0/3
+          ip addr 10.1.1.4 255.255.255.0
+          no shu
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: R4
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -720
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n1
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: iol-0-Ethernet0/0<->iol-l2-0-Ethernet0/0
+  - id: l1
+    n1: n3
+    n2: n0
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: iol-2-Ethernet0/1<->iol-l2-0-Ethernet0/1
+  - id: l2
+    n1: n2
+    n2: n0
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: iol-1-Ethernet0/2<->iol-l2-0-Ethernet0/2
+  - id: l3
+    n1: n4
+    n2: n0
+    i1: i4
+    i2: i4
+    conditioning: {}
+    label: iol-3-Ethernet0/3<->iol-l2-0-Ethernet0/3
+lab:
+  description: 'Lab2: Establishing neighbor adjacency using different methods'
+  notes: |-
+    #### Task 1
+    Configure R1 through R4 in AS 100.
+    - Ensure that these routers create an iBGP peering session with each other in a full mesh manner.
+    - Ensure that these routers advertise their Loopback0 interfaces in this AS.
+
+
+    #### Task 2
+    Reconfigure the routers based on the following policy:
+    - Keep R1 in AS 100.
+    - Configure R2, R3, and R4 in AS 200, 300, and 400, respectively.
+    A full mesh BGP peering session must be configured between these routers.
+    Advertise Loopback0 on each router into BGP.
+
+
+    #### Task 3
+    Reconfigure all the routers in AS 100.
+    Use the following policy for their iBGP peering sessions:
+    - Enable authentication between the peers, using cisco as the password.
+    - Ensure that the peering session is established based on the Loopback0 interface’s IP address.
+    - Ensure that these routers only advertise their Loopback1 interface in BGP.
+    - Provide reachability to the Loopback0 interfaces using RIPv2.
+    - Ensure that peering sessions between the routers are established only if they are running BGP Version 4.
+    - Use peer groups to accomplish this task.
+
+
+    #### Task 4
+    Remove the BGP configuration from the routers and reconfigure all four routers in AS 100 using peer session templates.
+    You should configure the following two templates to accomplish this task:
+    - Common template
+    - This template should contain the neighbor version 4 and neighbor password commands.
+    - This template should be applied to all neighbors.
+    - iBGP template
+    - This template should contain the neighbor update-source and neighbor remote as commands.
+    - This template should be applied to all iBGP neighbors.
+    You should advertise the Loopback1 interface in BGP and use Loopback0 for establishing the peering sessions.
+    Do not remove RIPv2’s configuration.
+  title: EIF_CHAP6_LAB2-T1-4
+  version: 0.3.0

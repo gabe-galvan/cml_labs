@@ -1,0 +1,1033 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R7
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/0
+          Ip address 67.1.1.7 255.255.255.0
+          No shut
+          !
+          Router eigrp 100
+          Network 67.1.1.7 0.0.0.0
+          !
+          !
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R7
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 720
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R1
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/0
+          Ip address 12.1.1.1 255.255.255.0
+          No shut
+          !
+          !
+          Interface e0/2
+          Ip address 14.1.1.1 255.255.255.0
+          No shut
+          !
+          !
+          interface e0/1
+          Ip address 13.1.1.1 255.255.255.0
+          No shut
+          !
+          !
+          Router ospf 1
+          Router-id 0.0.0.1
+          Network 12.1.1.1 0.0.0.0 a 0
+          !
+          !
+          interface lo0
+          ip address 128.1.1.1 255.255.0.0
+          Ip ospf network point-to-point
+          !
+          !
+          interface lo1
+          ip address 131.1.1.1 255.255.0.0
+          Ip ospf network point-to-point
+          !
+          !
+          interface lo2
+          ip address 191.1.1.1 255.255.0.0
+          Ip ospf network point-to-point
+          !
+          !
+          interface lo4
+          ip address 180.1.4.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          interface lo5
+          ip address 180.1.5.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          interface lo6
+          ip address 180.1.6.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          !
+          !
+          Router ospf 2
+          Router-id 0.0.0.11
+          Network 14.1.1.1 0.0.0.0 a 0
+          Network 180.1.6.1 0.0.0.0 a 0
+          Network 180.1.5.1 0.0.0.0 a 0
+          Network 180.1.4.1 0.0.0.0 a 0
+          !
+          !
+          Network 192.1.1.1 0.0.0.0 a 0
+          Network 191.1.1.1 0.0.0.0 a 0
+          Network 128.1.1.1 0.0.0.0 a 0
+          Network 131.1.1.1 0.0.0.0 a 0
+          !
+          !
+          !
+          Router rip
+          No auto-summary
+          Version 2
+          Network 13.0.0.0
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 200
+    y: -240
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R2
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/0
+          Ip address 12.1.1.2 255.255.255.0
+          No shut
+          !
+          !
+          Interface lo0
+          Ip address 192.1.1.33 255.255.255.224
+          Ip ospf network point-to-point
+          !
+          !
+          Interface lo1
+          Ip address 192.1.1.1 255.255.255.255
+          Ip ospf network point-to-point
+          !
+          !
+          Interface lo10
+          Ip address 172.16.0.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          Interface lo11
+          Ip address 172.16.1.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          Interface lo12
+          Ip address 172.16.2.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          Interface lo13
+          Ip address 172.16.3.1 255.255.255.0
+          Ip ospf network point-to-point
+          !
+          !
+          Router ospf 1
+          Router-id 0.0.0.2
+          Network 172.16.0.1 0.0.0.0 a 0
+          Network 172.16.1.1 0.0.0.0 a 0
+          Network 172.16.2.1 0.0.0.0 a 0
+          Network 172.16.3.1 0.0.0.0 a 0
+          Network 12.1.1.2 0.0.0.0 a 0
+          Network 192.1.1.1 0.0.0.0 a 0
+          Network 192.1.1.33 0.0.0.0 a 0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 80
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R3
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/1
+          Ip address 13.1.1.3 255.255.255.0
+          No shut
+          !
+          interface lo0
+          ip address 1.1.1.3 255.0.0.0
+          !
+          !
+          interface lo1
+          ip address 11.1.1.3 255.255.0.0
+          !
+          !
+          interface lo2
+          ip address 22.1.2.3 255.255.255.0
+          !
+          !
+          interface lo3
+          ip address 29.1.3.3 255.0.0.0
+          !
+          !
+          interface lo4
+          ip address 10.1.1.3 255.255.255.0
+          !
+          !
+          interface lo5
+          ip address 33.0.0.3 255.255.255.0
+          !
+          !
+          interface lo6
+          ip address 201.1.3.3 255.255.255.0
+          !
+          !
+          Interface lo7
+          Ip address 44.1.4.3 255.0.0.0
+          !
+          Router rip
+          No auto-summary
+          Version 2
+          Network 13.0.0.0
+          Network 44.0.0.0
+          Network 201.1.3.0
+          !
+          !
+          Network 33.0.0.0
+          Network 10.0.0.0
+          Network 29.0.0.0
+          !
+          !
+          Network 22.0.0.0
+          Network 11.0.0.0
+          Network 1.0.0.0
+          !
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: R3
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 320
+    y: -400
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R4
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/2
+          Ip address 14.1.1.4 255.255.255.0
+          No shut
+          !
+          !
+          interface e0/0
+          Ip address 45.1.1.4 255.255.255.0
+          No shut
+          !
+          !
+          Router ospf 1
+          Router-id 0.0.0.4
+          Network 14.1.1.4 0.0.0.0 a 0
+          !
+          !
+          interface lo0
+          ip address 198.1.1.4 255.255.255.0
+          !
+          !
+          interface lo1
+          ip address 199.1.1.4 255.255.255.0
+          !
+          !
+          interface lo2
+          ip address 200.1.1.4 255.255.255.0
+          !
+          !
+          interface lo3
+          ip address 223.1.1.4 255.255.255.0
+          !
+          !
+          !
+          interface lo4
+          ip address 200.1.4.9 255.255.255.248
+          !
+          !
+          interface lo5
+          ip address 200.1.5.5 255.255.255.252
+          !
+          !
+          Router eigrp 1
+          Network 45.1.1.4 0.0.0.0
+          Network 200.1.5.5 0.0.0.0
+          Network 200.1.4.9 0.0.0.0
+          !
+          !
+          Network 223.1.1.4 0.0.0.0
+          Network 200.1.1.4 0.0.0.0
+          !
+          Network 198.1.1.4 0.0.0.0
+          Network 199.1.1.4 0.0.0.0
+          !
+          !
+          Router rip
+          No auto-summary
+          Version 2
+          Network 10.0.0.0
+          Network 45.0.0.0
+          !
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: R4
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 400
+    y: -240
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R5
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/1
+          Ip address 56.1.1.5 255.255.255.0
+          No shut
+          !
+          !
+          interface e0/0
+          Ip address 45.1.1.5 255.255.255.0
+          No shut
+          !
+          !
+          Router eigrp 1
+          Network 45.1.1.5 0.0.0.0
+          !
+          !
+          Interface lo0
+          Ip address 10.4.4.33 255.255.255.224
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo1
+          Ip address 10.4.5.65 255.255.255.192
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo2
+          Ip address 211.4.4.33 255.255.255.224
+          ip ospf network point-to-point
+          !
+          !
+          Router rip
+          No auto-summary
+          Version 2
+          Network 10.0.0.0
+          Network 211.4.4.0
+          Network 45.0.0.0
+          !
+          !
+          !
+          !
+          !
+          Interface lo101
+          Ip address 205.1.1.241 255.255.255.240
+          ip ospf network point-to-point
+          !
+          interface lo102
+          Ip address 206.1.1.249 255.255.255.252
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo103
+          Ip address 207.1.1.193 255.255.255.192
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo104
+          Ip address 208.1.1.129 255.255.255.128
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo105
+          Ip address 189.1.1.1 255.255.255.0
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo106
+          Ip address 185.1.1.1 255.255.0.0
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo107
+          Ip address 186.1.128.5 255.255.128.0
+          ip ospf network point-to-point
+          !
+          !
+          Interface lo108
+          Ip address 99.1.1.1 255.0.0.0
+          ip ospf network point-to-point
+          !
+          !
+          Router ospf 1
+          Router-id 0.0.0.5
+          network 56.1.1.5 0.0.0.0 area 0
+          network 99.1.1.1 0.0.0.0 area 0
+          !
+          !
+          network 185.1.1.1 0.0.0.0 area 0
+          network 186.1.128.5 0.0.0.0 area 0
+          network 189.1.1.1 0.0.0.0 area 0
+          !
+          !
+          network 205.1.1.241 0.0.0.0 area 0
+          network 206.1.1.249 0.0.0.0 area 0
+          network 207.1.1.193 0.0.0.0 area 0
+          !
+          !
+          network 208.1.1.129 0.0.0.0 area 0
+          network 211.4.4.33 0.0.0.0 area 0
+          !
+          !
+          End
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: R5
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 520
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R6
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/1
+          Ip address 56.1.1.6 255.255.255.0
+          No shut
+          !
+          !
+          interface e0/0
+          Ip address 67.1.1.6 255.255.255.0
+          No shut
+          !
+          !
+          Interface lo0
+          Ip address 146.1.1.6 255.255.255.0
+          !
+          !
+          Interface lo1
+          Ip address 146.1.2.129 255.255.255.128
+          !
+          !
+          Interface lo2
+          Ip address 146.1.3.193 255.255.255.192
+          !
+          !
+          Interface lo3
+          Ip address 146.1.4.225 255.255.255.224
+          !
+          !
+          Interface lo4
+          Ip address 146.1.5.241 255.255.255.240
+          !
+          !
+          Router ospf 1
+          Router-id 0.0.0.6
+          Network 56.1.1.6 0.0.0.0 a 0
+          !
+          !
+          Router eigrp 100
+          Network 67.1.1.6 0.0.0.0
+          Network 146.1.1.6 0.0.0.0
+          Network 146.1.2.129 0.0.0.0
+          Network 146.1.3.193 0.0.0.0
+          Network 146.1.4.225 0.0.0.0
+          !
+          !
+          Network 146.1.5.241 0.0.0.0
+          Network 6.1.1.6 0.0.0.0
+          Network 6.1.2.129 0.0.0.0
+          Network 6.1.3.193 0.0.0.0
+          !
+          !
+          Network 6.1.4.225 0.0.0.0
+          Network 6.1.5.241 0.0.0.0
+          !
+          !
+          Interface lo5
+          Ip address 6.1.1.6 255.255.255.0
+          !
+          !
+          Interface lo6
+          Ip address 6.1.2.129 255.255.255.128
+          !
+          !
+          Interface lo7
+          Ip address 6.1.3.193 255.255.255.192
+          !
+          !
+          Interface lo8
+          Ip address 6.1.4.225 255.255.255.224
+          !
+          !
+          Interface lo9
+          Ip address 6.1.5.241 255.255.255.240
+          !
+          !
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: R6
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 640
+    y: -240
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n2
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R2-Ethernet0/0<->R1-Ethernet0/0
+  - id: l1
+    n1: n1
+    n2: n3
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R1-Ethernet0/1<->R3-Ethernet0/1
+  - id: l2
+    n1: n1
+    n2: n4
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: R1-Ethernet0/2<->R4-Ethernet0/2
+  - id: l3
+    n1: n4
+    n2: n5
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R4-Ethernet0/0<->R5-Ethernet0/0
+  - id: l4
+    n1: n5
+    n2: n6
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R5-Ethernet0/1<->R6-Ethernet0/1
+  - id: l5
+    n1: n6
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R6-Ethernet0/0<->R7-Ethernet0/0
+lab:
+  description: 'Lab 1: Prefix Lists'
+  notes: |-
+    #### Task 1
+
+    Configure R1 to filter 192.1.1.32/27 (an OSPF process ID 1 route) using a prefix list
+    through its E0/0 interface.
+
+    #### Task 2
+
+    Configure R1 such that it only permits class A networks that are not subnetted and filter
+    the rest of the prefixes/networks.
+    These are RIPv2 routes advertised by R3.
+
+    #### Task 3
+
+    Configure R4 such that it only allows class B networks that are not subnetted.
+    These are OSPF routes advertised by R1.
+
+    #### Task 4
+
+    Configure R5 such that it only allows class C networks that are not subnetted.
+    These are EIGRP routes that are advertised by R4.
+
+    #### Task 5
+
+    Configure R4 such that it denies networks 10.4.4.33/27 and 10.4.5.65/26 and allows the
+    rest of the networks. You should configure a minimum number of lines in the prefix list
+    to accomplish this task.
+    These are the RIPv2 routes advertised by R5.
+
+    #### Task 6
+
+    Configure R5 to inject a default route in the RIP routing domain. If this configuration is
+    successful, R4 should see the default route in its routing table.
+
+    #### Task 7
+
+    R4 should be configured to filter the default route injected in the previous task.
+
+    #### Task 8
+
+    Configure R6 to filter any networks with a prefix length of 26 or less.
+    These are OSPF routes advertised by R5.
+
+    #### Task 9
+
+    Reconfigure R6 to filter any networks with a prefix length of 26 or greater.
+    These are OSPF routes received from R5.
+
+    #### Task 10
+
+    Configure R7 to filter the following networks:
+    - 146.1.2.129/25
+    - 146.1.3.193/26
+    - 146.1.4.225/27
+    - 6.1.4.225/27
+    - 6.1.5.241/28
+
+    You should configure only three prefix list statements.
+    These are EIGRP routes advertised by R6.
+  title: EIF_CHAP2_LAB1
+  version: 0.3.0

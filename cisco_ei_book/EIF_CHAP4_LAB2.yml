@@ -1,0 +1,196 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R5
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/0
+          ip address 56.1.1.5 255.255.255.0
+          no shut
+          !
+          interface lo0
+          ip address 5.5.5.5 255.0.0.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: R5
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -360
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname R6
+          !
+          interface range Ethernet 0/0 - 3
+          no shut
+          !
+          vrf def ext_mgmt
+          rd 900:900
+          address-family ipv4
+          exit
+          !
+          username cisco priv 15 password 0 cisco
+          !
+          ip domain name lab.cml
+          !
+          cry key gen rsa mod 2048
+          !
+          !
+          interface e0/3
+          des External SSH Bridge DO NOT MODIFY
+          vrf forwarding ext_mgmt
+          no shut
+          !
+          !
+          ip route vrf ext_mgmt 0.0.0.0 0.0.0.0 192.168.68.1
+          !
+          line vty 0 4
+          transport input ssh
+          login local
+          !
+          ip bgp new-format
+          !
+          interface e0/0
+          ip address 56.1.1.6 255.255.255.0
+          no shut
+          !
+          interface lo0
+          ip address 6.6.6.6 255.0.0.0
+          no shut
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: R6
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -120
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        type: physical
+        slot: 0
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        type: physical
+        slot: 1
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        type: physical
+        slot: 2
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        type: physical
+        slot: 3
+links:
+  - id: l0
+    n1: n1
+    n2: n0
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: R6-Ethernet0/0<->R5-Ethernet0/0
+lab:
+  description: ''
+  notes: |-
+    #### Task 1
+    Configure the routers based on the previous diagram. Do not configure any routing
+    protocol.
+
+
+    #### Task 2
+    Configure EIGRP AS 100 on all directly connected interfaces of these two routers and
+    ensure reachability.
+    R5 should be configured using EIGRP classical mode, and R6 should
+    use the EIGRP named mode configuration style.
+
+
+    #### Task 3
+    Configure and test BFD on these two routers.
+
+
+    #### Task 4
+    Erase the startup configuration of these two routers and reload the devices before proceeding
+    to the next lab.
+    From
+  title: EIF_CHAP4_LAB2
+  version: 0.3.0
